@@ -1,0 +1,94 @@
+@host = 12354
+
+###
+# _id title parent
+
+### GET 모든 카테고리 불러오기
+GET http://localhost:{{host}}/api/categories
+
+### GET http://localhost:{{host}}/api/categories/:_id _id의 하위 카테고리 불러오기 :_id를 root로 하면 최상위 카테고리
+GET http://localhost:{{host}}/api/categories/5cf27a8c9bcf9224e84b50c4
+
+### POST http://localhost:{{host}}/api/categories 카테고리 만들기 (기본값 root)
+POST http://localhost:{{host}}/api/categories
+content-type: application/json
+
+{
+    "title": "사교/친목"
+}
+
+### POST http://localhost:{{host}}/api/categories/:_id 하위 카테고리 만들기
+POST http://localhost:{{host}}/api/categories/5cf27aaa9bcf9224e84b50c9
+content-type: application/json
+
+{
+    "title": "봉사활동"
+}
+
+### PATCH TEST
+PATCH http://localhost:{{host}}/api/categories/5ced35962f454e1a208c542b
+content-type: application/json
+
+{
+    "title": "독서/글쓰기"
+}
+
+### DELETE TEST
+DELETE http://localhost:{{host}}/api/categories/5cf3d10f9080fc201c611eaf
+
+
+
+# 레슨/스터디
+#  투자/재테크
+#  직무/취업
+#  음악/댄스/악기
+#  공예/취미
+#  기타
+# 독서모임
+#  독서/글쓰기
+# 직무/네트워킹
+#  스타트업
+#  기획/전력
+#  디자인
+#  마케팅/영업
+#  개발/엔지니어
+#  자영업
+#  전문직/기타
+# 문화/예술
+#  음악/악기
+#  영화/평론
+#  사진/영상
+#  공연/관람
+#  댄스/무용
+#  만화/애니
+#  미술/드로잉
+#  공예/DIY
+#  플라워
+#  패션/뷰티
+# 영어/외국어
+#  영어
+#  중국어/일본어
+#  기타언어
+# 스포츠/여행
+#  운동
+#  러닝
+#  스포츠관람
+#  등산
+#  여행
+# 요리/음식
+#  쿠킹/베이킹
+#  미식/맛집
+#  와인/주류
+#  커피/차
+# 사교/친목
+#  친목모임
+#  게임/오락
+#  반려동물
+#  육아/키즈
+#  차/바이크
+#  팬/연예인
+#  봉사활동
+
+
+
+

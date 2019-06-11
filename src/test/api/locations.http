@@ -1,0 +1,76 @@
+@host = 12354
+
+###
+# _id title parent
+
+### GET TEST
+GET http://localhost:{{host}}/api/locations
+
+### GET TEST
+GET http://localhost:{{host}}/api/locations/5cf389c0a631fc295473b12d
+
+### POST
+POST http://localhost:{{host}}/api/locations
+content-type: application/json
+
+{
+    "title": "경상북도"
+}
+
+### POST
+POST http://localhost:{{host}}/api/locations/5cf389c0a631fc295473b12d
+content-type: application/json
+
+{
+    "title": "충주시"
+}
+
+### PATCH TEST
+PATCH http://localhost:{{host}}/api/locations/5ced35962f454e1a208c542b
+content-type: application/json
+
+{
+    "title": "독서/글쓰기"
+}
+
+### DELETE TEST
+DELETE http://localhost:{{host}}/api/locations/5ced4f4025acc94e04dc29a2
+
+
+
+# 서울특별시
+
+# 경기도
+
+# 강원도
+
+# 경상남도
+
+# 경상북도
+
+# 광주광역시
+
+# 대구광역시
+
+# 대전광역시
+
+# 부산광역시
+
+# 세종특별자치시
+
+# 울산광역시
+
+# 인천광역시
+
+# 전라남도
+
+# 전라북도
+
+# 제주도
+
+# 충청남도
+
+# 충청북도
+
+
+

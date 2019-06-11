@@ -1,0 +1,9 @@
+@host = 12354
+###
+# _id title parent
+
+### POST 모임 운영진 임명하기
+POST http://localhost:{{host}}/api/togethers/5cfc79afa210894244bc5334/managerIds/5cfa0254bd90833098c03394
+
+### DELETE 모임 운영진 해임하기
+DELETE http://localhost:{{host}}/api/togethers/5cfc79afa210894244bc5334/managerIds/5cfa0254bd90833098c03394

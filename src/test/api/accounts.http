@@ -1,0 +1,53 @@
+@host = 12354
+
+### GET http://localhost:{{host}}/api/accounts = account목록s 전부 불러오기
+GET http://localhost:{{host}}/api/accounts
+
+### GET http://localhost:{{host}}/api/accounts/:_id = _id를 가진 accounts 목록 불러오기
+GET http://localhost:{{host}}/api/accounts/5cfa0254bd90833098c03394
+
+### GET http://localhost:{{host}}/api/existence/:key/:value
+### =key의 value값을 가진 account가s 존재하는지 확인 (key는 eamil과 phone 둘중 하나만 사용)
+GET http://localhost:{{host}}/api/accounts/existence/email/eternalsage@naver.com
+
+### POST http://localhost:{{host}}/api/accounts 계정만들기 : 필수값 username, email, password
+POST http://localhost:{{host}}/api/accounts/
+content-type: application/json
+
+{
+    "username" : "test2",
+    "email" : "test2@gmail.com",
+    "password" : "854120202qq!"
+}
+
+### PATCH http://localhost:{{host}}/api/accounts 계정만들기 : 필수값 username, email, password
+PATCH http://localhost:{{host}}/api/accounts/5cfa0246bd90833098c03393
+content-type: application/json
+
+{
+    "username" : "관리자1",
+    "message" : "관리자입니다"
+}
+
+### POST LOGIN하기
+POST http://localhost:{{host}}/api/accounts/auth
+content-type: application/json
+
+{
+    "email" : "cshee8508@gmail.com",
+    "password" : "854120202qq!"
+}
+
+### POST LOGOUT하기
+DELETE http://localhost:{{host}}/api/accounts/auth
+
+### GET accountss by togethers
+GET http://localhost:{{host}}/api/accounts/togethers/dd
+
+
+### POST 모임가입하기
+POST http://localhost:{{host}}/api/accounts/togethers/5cfc79afa210894244bc5334
+
+
+### POST 모임탈퇴하기
+DELETE http://localhost:{{host}}/api/accounts/togethers/5cf9faee20440c666cc3935d
