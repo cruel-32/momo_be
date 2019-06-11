@@ -117,7 +117,6 @@ const cryptoHash = password =>
     });
 
 Account.statics.findByEmail = function(email) {
-    // 객체에 내장되어있는 값을 사용 할 때는 객체명.키 이런식으로 쿼리하면 됩니다
     return this.findOne({
         email
     }).exec();
@@ -125,7 +124,6 @@ Account.statics.findByEmail = function(email) {
 
 Account.statics.findByEmailOrPhone = function({email, phone}) {
     return this.findOne({
-        // $or 연산자를 통해 둘중에 하나를 만족하는 데이터를 찾습니다
         $or: [
             { email },
             { phone }
@@ -171,7 +169,6 @@ Account.methods.validatePassword = async ({reqSalt, reqKey, password}) =>
     });
 
 Account.methods.generateToken = async function() {
-    // JWT 에 담을 내용
     const payload = {
         _id: this._id,
         thumbnail: this.thumbnail,
