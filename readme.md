@@ -1,4 +1,4 @@
-# Easy Together (가제);
+# MoMo (가제);
 
 ## 개요
 
