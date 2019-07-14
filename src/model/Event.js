@@ -15,9 +15,9 @@ const eventSchema = {
         type:Date,
         required: true
     },
-    categoryId : {
-        type :mongoose.Schema.Types.ObjectId,
-        required: true,
+    categoryCode : {
+        type :String,
+        required: true
     },
     locationCode : {
         type :String,

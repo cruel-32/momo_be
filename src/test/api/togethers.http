@@ -6,31 +6,31 @@
 GET http://localhost:{{host}}/api/togethers
 
 ### GET TEST 특정 모임 불러오기
-GET http://localhost:{{host}}/api/togethers/5cfc79afa210894244bc5334
+GET http://localhost:{{host}}/api/togethers/5d01077b96c4a30d5832aa93
 
 ### POST TEST 모임 생성하기
 POST http://localhost:{{host}}/api/togethers/
 content-type: application/json
 
 {
-    "title" : "테스트유저의 모임입니다",
+    "title" : "테스터1의 모임입니다",
     "categoryId" : "5cf27b069bcf9224e84b50d0",
     "locationId" : "5cf38a4294371522a4c10144",
-    "message" : "테스트 모임에 오신걸 환영합니다",
+    "message" : "테스터1의 모임에 오신걸 환영합니다",
     "limit" : 30
 }
 
 
 ### PUT TEST 모임 수정하기(PUT이지만 현재는 PATCH와 동일하게 작동함)
-PUT http://localhost:{{host}}/api/togethers/5cfc79afa210894244bc5334
+PUT http://localhost:{{host}}/api/togethers/5d01077b96c4a30d5832aa93
 content-type: application/json
 
 {
-    "limit" : 40
+    "minAge" : "{{$datetime '1990-05-20'}}"
 }
 
 ### PATCH TEST 모임 수정하기(PUT)
-PATCH http://localhost:{{host}}/api/togethers/5cfc79afa210894244bc5334
+PATCH http://localhost:{{host}}/api/togethers/5d01077b96c4a30d5832aa93
 content-type: application/json
 
 {
@@ -38,10 +38,10 @@ content-type: application/json
 }
 
 ### GET 모임 이벤트-카테고리 전부 가져오기
-GET http://localhost:{{host}}/api/togethers/5cfc79afa210894244bc5334/eventcategories/
+GET http://localhost:{{host}}/api/togethers/5d21900d0b1d6d4cac321b79/eventcategories/
 
 ### POST 모임 이벤트-카테고리 생성하기(POST)
-POST http://localhost:{{host}}/api/togethers/5cfc79afa210894244bc5334/eventcategories/
+POST http://localhost:{{host}}/api/togethers/5d21900d0b1d6d4cac321b79/eventcategories/
 content-type: application/json
 
 {
@@ -49,7 +49,7 @@ content-type: application/json
 }
 
 ### PATCH 모임 이벤트-카테고리 수정하기(PATCH)
-PATCH http://localhost:{{host}}/api/togethers/5cfc79afa210894244bc5334/eventcategories/5cfc6008ee72fe5c145ffb96
+PATCH http://localhost:{{host}}/api/togethers/5d01077b96c4a30d5832aa93/eventcategories/5cfc6008ee72fe5c145ffb96
 content-type: application/json
 
 {
@@ -57,5 +57,5 @@ content-type: application/json
 }
 
 ### DELETE 모임 이벤트-카테고리 삭제하기(DELETE)
-DELETE http://localhost:{{host}}/api/togethers/5cfc79afa210894244bc5334/eventcategories/5cfb503ad925160ce83f1e4c
+DELETE http://localhost:{{host}}/api/togethers/5d01077b96c4a30d5832aa93/eventcategories/5cfb503ad925160ce83f1e4c
 

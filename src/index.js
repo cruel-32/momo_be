@@ -13,7 +13,6 @@ const { jwtMiddleware } = require('lib/token');
 const cors = require('@koa/cors');
 
 const whitelist = [
-  'https://github.com/cruel-32/easytogether',
   'http://192.168.0.4:13354', //승승 작업실
   'http://192.168.35.108:13354', //승승 노트북
   'http://192.168.35.197:13354', //승승 노트북
@@ -47,31 +46,42 @@ funcNames.forEach((funcName,idx)=>{
   };
 });
 
-const checkOriginAgainstWhitelist = (ctx) =>{
-  const requestOrigin = ctx.accept.headers.origin;
-  if(!whitelist.includes(requestOrigin)){
-    ctx.status = 400;
-    ctx.body = {msg:`🙈 ${requestOrigin} is not a valid origin`};
-    return;
-  }
-  return requestOrigin;
-}
+// const checkOriginAgainstWhitelist = (ctx) =>{
+//   const requestOrigin = ctx.accept.headers.origin;
+//   if(!whitelist.includes(requestOrigin)){
+//     ctx.status = 400;
+//     ctx.body = {msg:`🙈 ${requestOrigin} is not a valid origin`};
+//     return;
+//   }
+//   return requestOrigin;
+// }
 
-app.use(cors({ origin: checkOriginAgainstWhitelist }));
+// app.use(cors({ origin: checkOriginAgainstWhitelist }));
+app.use(cors()); //당분간 모든 요청 허용
 
 // logger
 app.use(async (ctx, next) => {
+  // console.log('ctx.headers : ', ctx.headers);
   await next();
+  // if(ctx.request.access_token){
+  //   console.log('재발급');
+  //   const {access_token} = ctx.request;
+  //   ctx.body = {
+  //     ...ctx.body,
+  //     access_token
+  //   }
+  // }
   const rt = ctx.response.get('X-Response-Time');
-  console.log(`로깅테스트 ${ctx.method} ${ctx.url} - ${rt}`);
+  console.log(`로깅테스트 ${ctx.method} ${ctx.url} - ${rt}. cookies : ${ctx.cookies.get('access_token')}`);
+  // console.log(`로깅테스트 ${ctx.method} ${ctx.url} - ${rt}.`);
+  // ctx.headers.access_token : ${ctx.headers.access_token}`);
 });
 
 // x-response-time
 app.use(async (ctx, next) => {
   const start = Date.now();
   await next();
-  const ms = Date.now() - start;
-  ctx.set('X-Response-Time', `${ms}ms`);
+  ctx.set('X-Response-Time', `${Date.now() - start}ms`);
 });
 
 app.use(bodyParser()); //라우터보다 상단에 위치
@@ -87,6 +97,6 @@ app.listen(port, () => {
   console.warn("Warn is orange.");
   console.error("Error is red.");
   console.info("--------------------");
-  console.info(`easytogether application launched at http://localhost:${port} This api server is allowed for heroku server${whitelist.reduce((list,white)=>`${list} and ${white}`,``)}`);
+  console.info(`momo application launched at http://localhost:${port} This api server is allowed for heroku server${whitelist.reduce((list,white)=>`${list} and ${white}`,``)}`);
 });
 

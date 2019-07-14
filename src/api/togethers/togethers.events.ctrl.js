@@ -8,15 +8,13 @@ exports.getEvents = async ctx => {
     const { user, query } = ctx.request;
     const { togetherId } = ctx.params;
 
-    console.log('ctx.request.query : ', ctx.request.query);
-    console.log('ctx.query: ', ctx.query);
     // console.log('user : ', user);
 
-    // if(!user) {
-    //     ctx.status = 403;
-    //     ctx.body = {msg:'로그인이 필요합니다'};
-    //     return;
-    // }
+    if(!user) {
+        ctx.status = 403;
+        ctx.body = {msg:'로그인이 필요합니다'};
+        return;
+    }
 
     if(!ObjectId.isValid(togetherId)) {
         ctx.status = 400;
@@ -39,7 +37,7 @@ exports.getEvents = async ctx => {
     }
 
     try {
-        const together = await Together.findById(togetherId);
+        // const together = await Together.findById(togetherId);
 
         let {
             date, categoryId, locationCode, startdate, enddate
@@ -117,7 +115,7 @@ exports.createEvent = async ctx => {
 
     const validation = Joi.validate(body, Joi.object().keys({
         title: Joi.string().min(5).max(20).required(),
-        categoryId: Joi.string().required(),
+        categoryCode: Joi.string().required(),
         locationCode: Joi.string().required(),
         message: Joi.string().required(),
         date: Joi.date().required(),
@@ -133,7 +131,6 @@ exports.createEvent = async ctx => {
 
     console.log('date : ', body.date);
     console.log('date moment : ', moment(body.date).format('YYYYMMDD hh:mm'));
-
 
     try {
         const together = await Together.findById(togetherId);

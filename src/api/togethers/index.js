@@ -21,17 +21,17 @@ togethers.delete('/:togetherId/eventcategories/:_id', eventcategoriesCtrl.delete
 
 
 //벙 조회 생성 수정 삭제
-togethers.get('/:togetherId/event/', eventsCtrl.getEvents); //모든 벙 불러오기
-togethers.get('/:togetherId/event/:_id', eventsCtrl.getEvent); //벙 1개 불러오기
+togethers.get('/:togetherId/events/', eventsCtrl.getEvents); //모든 벙 불러오기
+togethers.get('/:togetherId/events/:_id', eventsCtrl.getEvent); //벙 1개 불러오기
 
-togethers.post('/:togetherId/event/', eventsCtrl.createEvent); //벙 생성하기
+togethers.post('/:togetherId/events/', eventsCtrl.createEvent); //벙 생성하기
 
-togethers.patch('/:togetherId/event/:_id', eventsCtrl.patchEvent); //벙 수정하기
-togethers.delete('/:togetherId/event/:_id', eventsCtrl.deleteEvent); //벙 삭제하기
+togethers.patch('/:togetherId/events/:_id', eventsCtrl.patchEvent); //벙 수정하기
+togethers.delete('/:togetherId/events/:_id', eventsCtrl.deleteEvent); //벙 삭제하기
 
 //벙 참석&참석취소하기
-togethers.post('/:togetherId/event/:_id/members/:userId', eventsCtrl.joinEvent); //벙 참석하기
-togethers.delete('/:togetherId/event/:_id/members/:userId', eventsCtrl.outEvent); //벙 참석 취소하기
+togethers.post('/:togetherId/events/:_id/members/:userId', eventsCtrl.joinEvent); //벙 참석하기
+togethers.delete('/:togetherId/events/:_id/members/:userId', eventsCtrl.outEvent); //벙 참석 취소하기
 
 //모임 운영진 임명&해임
 togethers.post('/:togetherId/managerIds/:_id', managerIdsCtrl.createManager); //운영진 임명하기

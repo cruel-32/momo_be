@@ -28,30 +28,31 @@ const decodeToken = token =>
     );
 
 const jwtMiddleware = async (ctx, next) => {
-    const token = ctx.cookies.get('access_token'); // ctx 에서 access_token 을 읽어옵니다
-    if(!token) return next(); // 토큰이 없으면 바로 다음 작업을 진행합니다.
-
+    // cookie를 삭제
+    const token = ctx.cookies.get('access_token') || ctx.headers['access_token'];
+    // const token = ctx.headers['access_token']
+    if(!token) return next();
     try {
         const decoded = await decodeToken(token); // 토큰을 디코딩 합니다
+        // if(Date.now() / 1000 - decoded.iat > 60 * 60 * 24 * 5) {
+        //     const {
+        //         _id,
+        //         thumbnail,
+        //         username,
+        //     } = decoded;
 
-        if(Date.now() / 1000 - decoded.iat > 60 * 60 * 24) {
-            const {
-                _id,
-                thumbnail,
-                username,
-            } = decoded;
-
-            const freshToken = await generateToken({ _id, thumbnail, username, }, 'account');
-            ctx.cookies.set('access_token', freshToken, {
-                maxAge: 1000 * 60 * 60 * 24 * 7, // 7days
-                httpOnly: true
-            });
-        }
-
-        // ctx.request.user 에 디코딩된 값을 넣어줍니다
+        //     // ctx.request.access_token = await generateToken({ _id, thumbnail, username, }, 'account');
+        //     const access_token = await generateToken({ _id, thumbnail, username, }, 'account');
+        //     ctx.cookies.set('access_token', access_token, {
+        //         maxAge: 1000 * 60 * 60 * 24 * 7, // 7days
+        //         httpOnly: true
+        //     });
+        // }
+        //재발급 로직 당분간 사용x
         ctx.request.user = decoded;
+        // return access_token;
     } catch (err) {
-        // token validate 실패
+        console.log('token validate 실패 : ', err)
         ctx.request.user = null;
     }
 

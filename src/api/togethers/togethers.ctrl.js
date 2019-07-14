@@ -82,6 +82,11 @@ exports.createTogether = async ctx => {
     try {
         const userInfo = await Account.findOne({_id:user._id}).exec();
         const maxLen = 1;
+        if(userInfo.authentication === 'N'){
+            ctx.status = 400;
+            ctx.body = {msg:'실명인증이 필요합니다'};
+            return;
+        }
         if(userInfo.owns && (userInfo.owns.length >= maxLen)){
             ctx.status = 400;
             ctx.body = {msg:`최대 ${maxLen}개의 모임을 만들 수 있습니다.`};

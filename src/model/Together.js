@@ -25,14 +25,21 @@ const togetherSchema = {
         type: mongoose.Schema.Types.ObjectId,
         required:true,
     },
-    owns : {
-        type: [{
+    // owns : {
+    //     type: [{
+    //         type : mongoose.Schema.Types.ObjectId,
+    //         ref: 'Together'
+    //     }],
+    //     default:[]
+    // },
+    managerIds : {
+        type : [{
             type : mongoose.Schema.Types.ObjectId,
-            ref: 'Together'
+            ref: 'Account'
         }],
         default:[]
     },
-    managerIds : {
+    bannedIds : {
         type : [{
             type : mongoose.Schema.Types.ObjectId,
             ref: 'Account'
