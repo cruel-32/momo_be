@@ -65,9 +65,8 @@ class AccountsController extends Controller {
 
     public patchAccountAuth = async (ctx:Context) => {
         try{
-            const { user } = ctx.request;
+            const { user, body } = ctx.request;
             const { _id } = ctx.params;
-            const { body } = ctx.request;
         
             this.validateObjectId(_id);
             this.authenticateLoggedUser(user);
